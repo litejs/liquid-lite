@@ -1,0 +1,14 @@
+<ul class="products">
+  {% for product in products limit: 5 %}
+    <li>
+      <h2>{{ product.title | upcase }}</h2>
+      Only {{ product.price }}
+      <p>{{ product.description }}</p>
+    </li>
+  {% endfor %}
+
+  {% for product in products offset: 5 %}
+    <li>{{ product.title }} {{ product.price }}</li>
+  {% endfor %}
+</ul>
+

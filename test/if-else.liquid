@@ -1,0 +1,28 @@
+{% if user %}
+Hello {{ user.name }}
+{% endif %}
+
+{% if user.name == 'tobi' %}
+Hello tobi
+{% else %}
+Hello Ann Õun
+{% endif %}
+
+{% if user.name == 'bob' && user.age > 45 %}
+Hello old bob
+{% endif %}
+
+{% if user.name != 'tobi' %}
+Hello non-tobi
+{% endif %}
+
+{% if user.creditcard %}
+poor sob
+{% endif %}
+
+{% if user.age > 18 %}
+Login here
+{% else %}
+Sorry, you are too young
+{% endif %}
+
