@@ -2,7 +2,7 @@
 
 
 /*
-* @version  0.1
+* @version  0.1.0
 * @author   Lauri Rooden - https://github.com/litejs/liquid-lite
 * @license  MIT License  - http://lauri.rooden.ee/mit-license.txt
 */
