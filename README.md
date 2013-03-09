@@ -1,8 +1,8 @@
 
 [1]: https://github.com/Shopify/liquid/ "Shopify in github"
-[2]: https://raw.github.com/litejs/liquid-lite.js/master/test/test.html "test/test.html"
-[3]: https://raw.github.com/litejs/liquid-lite.js/master/liquid-lite.min.js
-[4]: https://raw.github.com/litejs/liquid-lite.js/master/liquid-lite.js
+[2]: https://raw.github.com/litejs/liquid-lite/master/test/test.html "test/test.html"
+[3]: https://raw.github.com/litejs/liquid-lite/master/liquid-lite.min.js
+[4]: https://raw.github.com/litejs/liquid-lite/master/liquid-lite.js
 
 Liquid template engine
 ======================
