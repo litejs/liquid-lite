@@ -1,10 +1,9 @@
 {
   "name": "liquid-lite",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "description": "Liquid template engine",
   "main": "liquid-lite.js",
-  "homepage": "http://www.litejs.com/liquid-lite/",
   "author": "Lauri Rooden <lauri@rooden.ee>",
 	"repository": {
 		"type": "git",

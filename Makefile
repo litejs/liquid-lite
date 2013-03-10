@@ -1,13 +1,17 @@
 
+
+include package.mk
+
+
 .PHONY: test
 
 
 all: compile
-all: SIZE=$(shell cat liquid-lite.min.js | wc -c)
-all: SIZE_GZ=$(shell gzip -c liquid-lite.min.js | wc -c)
+all: SIZE=$(shell cat $(FILE_MIN) | wc -c)
+all: SIZE_GZ=$(shell gzip -c $(FILE_MIN) | wc -c)
 all:
 	@printf "Original Size %s Compiled Size %s or %s gzipped\n" \
-	        "$$(cat liquid-lite.js | wc -c) bytes" \
+	        "$$(cat $(FILE) | wc -c) bytes" \
 	        "$(SIZE) bytes" \
 	        "$(SIZE_GZ) bytes"
 	@sed -i '/ bytes or .* gzipped/s/.*/($(SIZE) bytes or $(SIZE_GZ) bytes gzipped)/' README.md 
@@ -17,14 +21,14 @@ compile:
 	@curl -s \
 		    --data-urlencode 'output_info=compiled_code' \
 				--data-urlencode 'output_format=text' \
-				--data-urlencode 'js_code@liquid-lite.js' \
-				'http://closure-compiler.appspot.com/compile' > liquid-lite.min.js
+				--data-urlencode 'js_code@$(FILE)' \
+				'http://closure-compiler.appspot.com/compile' > $(FILE_MIN)
 
 error:
 	@curl -s \
 		    --data-urlencode 'output_info=errors' \
 				--data-urlencode 'output_format=text' \
-				--data-urlencode 'js_code@liquid-lite.js' \
+				--data-urlencode 'js_code@$(FILE)' \
 				'http://closure-compiler.appspot.com/compile'
 
 test:

@@ -2,7 +2,7 @@
 
 
 /*
-* @version  0.1.0
+* @version  0.1.1
 * @author   Lauri Rooden - https://github.com/litejs/liquid-lite
 * @license  MIT License  - http://lauri.rooden.ee/mit-license.txt
 */
@@ -13,7 +13,7 @@
 
 	function liquid(s) {
 		s = s
-		.replace(/\n/g, "\\n")
+		.replace(/\r?\n/g, "\\n")
 		.replace(/{{\s*((?:[^}]|}(?!}))+)\s*}}?/g, function(_, a) {
 			return "',(" + a.replace(/([^|])\|\s*([^|\s:]+)(?:\s*\:([^|]+))?/g, "$1).$2($3") + "),'"
 		})
