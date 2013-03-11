@@ -15,25 +15,64 @@ or [uncompressed][4] source.
 Full version in ruby is available [by Shopify][1]
 
 
-## What does it look like?
+## When to use liquid-lite
+
+- When you trust your templates
+
+
+## How to use in browser
 
 ```html
+<script src=liquid-lite.min.js></script>
+
+<script id=products type="text/liquid">
 <ul class="products">
-  {% for product in products limit:5 %}
+  {% for product in products %}
     <li>
       <h2>{{ product.title | upcase }}</h2>
       Only {{ product.price }}
       <p>{{ product.description }}</p>
     </li>
   {% endfor %}
-
-  {% for product in products offset:5 %}
-    <li>{{ product.title }} {{ product.price }}</li>
-  {% endfor %}
 </ul>
+</script>
+
+<div id=page></div>
+
+<script>
+var template = liquid( document.getElementById("products").innerHTML )
+
+var data = { products:
+  [ { title: "Product A", price: 1.01, description: "Hello a" }
+  , { title: "Product B", price: 1.02, description: "Hello b" }
+  , { title: "Product C", price: 1.03, description: "Hello c" }
+  ]
+}
+
+document.getElementById("page").innerHTML = template(data)
+</script>
 ```
 
 See [test.html][2] for more examples
+
+## How to use in node.js
+
+npm install liquid-lite
+
+```javascript
+var liquid = require("liquid-lite").liquid
+
+var template = liquid( my_template_string )
+
+var data = { products:
+  [ { title: "Product A", price: 1.01, description: "Hello a" }
+  , { title: "Product B", price: 1.02, description: "Hello b" }
+  , { title: "Product C", price: 1.03, description: "Hello c" }
+  ]
+}
+
+var output = template(data)
+```
 
 **Liquid Filters** are available thru prototypes.
 Make as many as you need.
