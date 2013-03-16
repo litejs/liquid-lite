@@ -2,7 +2,7 @@
 
 
 /*
-* @version  0.1.1
+* @version  0.1.2
 * @author   Lauri Rooden - https://github.com/litejs/liquid-lite
 * @license  MIT License  - http://lauri.rooden.ee/mit-license.txt
 */
@@ -17,18 +17,17 @@
 		.replace(/{{\s*((?:[^}]|}(?!}))+)\s*}}?/g, function(_, a) {
 			return "',(" + a.replace(/([^|])\|\s*([^|\s:]+)(?:\s*\:([^|]+))?/g, "$1).$2($3") + "),'"
 		})
-		.replace(/{%\s*(for|if|elsif)?\s*((?:[^%]|%(?!}))+)%}(\\n)?/g, function(_, a, b) {
+		.replace(/{%\s*(for|if|elsif)?\s*(\!?)\s*((?:[^%]|%(?!}))+)\s*%}(\\n)?/g, function(_, a, c, b) {
 			if (a == "for") {
-				if (_ = b.match(/^(\w+) in (\w+)?/)) {
-					a = "var loop={i:0,offset:0},_0=loop,_2="
-					  + (_[2]?"o."+_[2]+"||{}":"")
-						+ b.slice(_[0].length).replace(/^ (limit|offset):\s*(\d+)/ig, ";_0.$1=$2")
+				if (_ = b.match(/^(\w+) in (\w+)?(.*)/)) {
+					a = "var loop={i:0,offset:0},_0=loop,_2=o."+_[2]
+						+ _[3].replace(/^ (limit|offset):\s*(\d+)/ig, ";_0.$1=$2")
 						+ ";if(_2)for"
 					_ = "_1 in _2)if(_2.hasOwnProperty(_1)){if(_0.offset&&_0.offset--)continue;_0.i++;if(_0.limit&&_0.i-_0.offset>_0.limit)break;_0.key=_1;var "+_[1]+"=_2[_1];"
 				} else _ = b+"){"
 				_ = "');"+a+"(var "+_
 			} else if (a) {
-				_ = "')"+(a == "if" ? ";" : "}else ")+"if("+b+"){"
+				_ = "')"+(a == "if" ? ";" : "}else ")+"if("+c+"("+b.replace(/^[\w]+\s*$/, "o.$&")+")){"
 			} else {
 				_ = b == "else " ? "')}else{" : "')};"
 			}
