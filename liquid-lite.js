@@ -24,10 +24,9 @@
 					  + (_[2]?"o."+_[2]+"||{}":"")
 						+ b.slice(_[0].length).replace(/^ (limit|offset):\s*(\d+)/ig, ";_0.$1=$2")
 						+ ";if(_2)for"
-					b = "_1 in _2)if(_2.hasOwnProperty(_1)){if(_0.offset&&_0.offset--)continue;_0.i++;if(_0.limit&&_0.i-_0.offset>_0.limit)break;_0.key=_1;var "+_[1]+"=_2[_1];"
-					_ = ""
-				} else _ = "){"
-				_ = "');"+a+"("+b.replace(/^\(|\)\s*$/g,"")+_
+					_ = "_1 in _2)if(_2.hasOwnProperty(_1)){if(_0.offset&&_0.offset--)continue;_0.i++;if(_0.limit&&_0.i-_0.offset>_0.limit)break;_0.key=_1;var "+_[1]+"=_2[_1];"
+				} else _ = b+"){"
+				_ = "');"+a+"("+_
 			} else {
 				_ = b == "else " ? "')}else{" : "')};"
 			}

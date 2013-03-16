@@ -1,17 +1,17 @@
 {
   "name": "liquid-lite",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
-  "description": "Liquid template engine",
+  "description": "Liquid template engine for browser and node.js",
   "main": "liquid-lite.js",
   "author": "Lauri Rooden <lauri@rooden.ee>",
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/litejs/liquid-lite.git"
-	},
-	"bugs": {
-		"url": "https://github.com/litejs/liquid-lite/issues"
-	},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/litejs/liquid-lite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/litejs/liquid-lite/issues"
+  },
   "directories": {
     "test": "test"
   },
@@ -23,5 +23,5 @@
     "engine",
     "liquid"
   ],
-	"readmeFilename": "README.md"
+  "readmeFilename": "README.md"
 }
