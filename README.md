@@ -9,7 +9,7 @@ Liquid template engine
 
 Lite version of Liquid markup template engine writen in javascript.
 Download [compressed][3] 
-(896 bytes or 582 bytes gzipped)
+(953 bytes or 606 bytes gzipped)
 or [uncompressed][4] source.
 
 Full version in ruby is available [by Shopify][1]
