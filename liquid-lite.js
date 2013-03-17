@@ -2,7 +2,7 @@
 
 
 /*
-* @version  0.1.2
+* @version  0.1.3-dev
 * @author   Lauri Rooden - https://github.com/litejs/liquid-lite
 * @license  MIT License  - http://lauri.rooden.ee/mit-license.txt
 */
@@ -14,10 +14,10 @@
 	function liquid(s) {
 		s = s
 		.replace(/\r?\n/g, "\\n")
-		.replace(/{{\s*((?:[^}]|}(?!}))+)\s*}}?/g, function(_, a) {
+		.replace(/{{((?:[^}]|}(?!}))+)}}/g, function(_, a) {
 			return "',(" + a.replace(/([^|])\|\s*([^|\s:]+)(?:\s*\:([^|]+))?/g, "$1).$2($3") + "),'"
 		})
-		.replace(/{%\s*(for|if|elsif)?\s*(\!?)\s*((?:[^%]|%(?!}))+)\s*%}(\\n)?/g, function(_, a, c, b) {
+		.replace(/{%\s*(for|if|elsif)?\s*(\!?)\s*((?:[^%]|%(?!}))+)%}\\n?/g, function(_, a, c, b) {
 			if (a == "for") {
 				if (_ = b.match(/^(\w+) in (\w+)?(.*)/)) {
 					a = "var loop={i:0,offset:0},_0=loop,_2=o."+_[2]

@@ -21,7 +21,8 @@
   "keywords": [
     "template",
     "engine",
-    "liquid"
+    "liquid",
+    "litejs"
   ],
   "readmeFilename": "README.md"
 }
