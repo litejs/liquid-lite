@@ -3,17 +3,21 @@
 [2]: https://raw.github.com/litejs/liquid-lite/master/test/test.html "test/test.html"
 [3]: https://raw.github.com/litejs/liquid-lite/master/liquid-lite.min.js
 [4]: https://raw.github.com/litejs/liquid-lite/master/liquid-lite.js
+[5]: https://github.com/darthapo/liquid.js
 
 Liquid template engine
 ======================
 
-Lite version of Liquid markup template engine writen in javascript.
+This is a not complete port of [Liquid][1] template engine.
 Download [compressed][3] 
-(958 bytes or 616 bytes gzipped)
+(1055 bytes or 666 bytes gzipped)
 or [uncompressed][4] source.
+A complete port is available [by darthapo][5].
 
-Full version in ruby is available [by Shopify][1]
+### Currently supported tags
 
+- if
+- for
 
 ## When to use liquid-lite
 

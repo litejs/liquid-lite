@@ -1,5 +1,8 @@
 <script src="../liquid-lite.min.js"></script>
 
+
+
+
 <script type="text/liquid">
 <ul class="products">
   {% for product in products limit: 5 %}
@@ -9,24 +12,65 @@
       <p>{{ product.description }}</p>
     </li>
   {% endfor %}
-	
-	{% for product in products offset: 5 %}
-	<li>{{ product.title }} {{ product.price }}</li>
+
+  {% for product in products offset: 5 %}
+    <li>{{ product.title }} {{ product.price }}</li>
   {% endfor %}
 </ul>
 </script>
 
+
 <script type="text/liquid">
-<pre>
-Hello {{ 'to"\'bi' | upcase }}
-tobi has {{ 'tobi' | size }} letters!
-</pre>
+{% for item in array %}
+	{% if item %}
+		Item exists
+	{% endif %}
+
+	{% if item == 2 %}
+		Item is 2
+	{% endif %}
+
+	{% if not_found %}
+		Found Not Found
+	{% endif %}
+
+	{% if !not_found %}
+		Not Found Not Found
+	{% endif %}
+
+	<li> {{ item }}
+{% endfor %}
 </script>
 
-<script type="text/liquid">
-If / Else
 
-<pre>
+<script type="text/liquid">
+{% for item in array %}
+<li> {{ item }}
+{% endfor %}
+
+{% for i = 3; --i > 0; %}
+<li> i = {{ i }}
+{% endfor %}
+
+{% for attr in user %}
+<li> User has a {{ attr }}
+{% endfor %}
+
+{% for attr in deeper.object %}
+<li> User has a {{ attr }}
+{% endfor %}
+
+{% for attr in deeper.not_found %}
+<li> User has a {{ attr }}
+{% endfor %}
+
+{% for item in ["a", "b", "c"] %}
+<li> {{ item }}
+{% endfor %}
+</script>
+
+
+<script type="text/liquid">
 {% if user %}
 Hello {{ user.name }}
 {% endif %}
@@ -45,7 +89,6 @@ Hello old bob
 Hello non-tobi
 {% endif %}
 
-# Check if the user has a credit card
 {% if user.creditcard %}
 poor sob
 {% endif %}
@@ -55,33 +98,38 @@ Login here
 {% else %}
 Sorry, you are too young
 {% endif %}
-</pre>
 </script>
+
 
 <script type="text/liquid">
-For loops
-
-{% for item in array %}
-<li> {{ item }}
-{% endfor %}
-
-{% for i = 3; --i > 0; %}
-<li> i = {{ i }}
-{% endfor %}
-
-{% for attr in user %}
-<li> User has a {{ attr }}
-{% endfor %}
-
-
-
+{% if user.name == 'tobi' %}
+Hello tobi
+{% elsif user.name == 'bobi' %}
+Hello bobi
+{% else %}
+Hello unknown
+{% endif %}
 </script>
 
 
+<script type="text/liquid">
+{% if not_found %}
+Found Not Found
+{% endif %}
+
+{% if !not_found %}
+Not Found Not Found
+{% endif %}
+</script>
+
+
+<script type="text/liquid">
+Hello {{name||"x"}}
+Hello {{user.name}}
+Hello {{ 'tobi' }}
+</script>
 
 <div id=result></div>
-
-
 
 <script>
 	var el
@@ -101,10 +149,8 @@ For loops
 			, { title: "Product I", price: 1.09, description: "Hello" }
 			, { title: "Product J", price: 1.10, description: "Hello" }
 			]
-		, user: 
-			{ name: "tobi"
-			, age: 19
-			}
+		, user: { name: "tobi", age: 19 }
+		, deeper: { object: { key: "value" } }
 		, array: [ 1, 2, 3 ]
 		, string: "hello world"
 		}
@@ -116,6 +162,3 @@ For loops
 	document.getElementById("result").innerHTML = out.join("<hr>")
 
 </script>
-
-
-

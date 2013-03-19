@@ -17,10 +17,8 @@ var found = 0
 		, { title: "Product I", price: 1.09, description: "Hello" }
 		, { title: "Product J", price: 1.10, description: "Hello" }
 		]
-	, user: 
-		{ name: "tobi"
-		, age: 19
-		}
+	, user: { name: "tobi", age: 19 }
+	, deeper: { object: { key: "value" } }
 	, array: [ 1, 2, 3 ]
 	, string: "hello world"
 	}

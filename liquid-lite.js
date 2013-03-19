@@ -2,7 +2,7 @@
 
 
 /*
-* @version  0.1.3-dev
+* @version  0.1.3
 * @author   Lauri Rooden - https://github.com/litejs/liquid-lite
 * @license  MIT License  - http://lauri.rooden.ee/mit-license.txt
 */
@@ -11,30 +11,35 @@
 
 !function(root, S) {
 
-	function liquid(s) {
-		s = s
+	function liquid(source) {
+		var var_names = {"_=[]":1}
+		source = source
 		.replace(/\r?\n/g, "\\n")
-		.replace(/{{((?:[^}]|}(?!}))+)}}/g, function(_, a) {
+		.replace(/{{\s*((?:[^}]|}(?!}))+)}}/g, function(_, a) {
+			var_names[a.match(/^\w+/)]=1
 			return "',(" + a.replace(/([^|])\|\s*([^|\s:]+)(?:\s*\:([^|]+))?/g, "$1).$2($3") + "),'"
 		})
 		.replace(/{%\s*(for|if|elsif)?\s*(\!?)\s*((?:[^%]|%(?!}))+)%}\\n?/g, function(_, a, c, b) {
 			if (a == "for") {
-				if (_ = b.match(/^(\w+) in (\w+)?(.*)/)) {
-					a = "var loop={i:0,offset:0},_0=loop,_2=o."+_[2]
-						+ _[3].replace(/^ (limit|offset):\s*(\d+)/ig, ";_0.$1=$2")
+				if (_ = b.match(/^(\w+) in ([\w\.]+)?(.*)/)) {
+					a = "var loop={i:0,offset:0},_3=loop,_2="
+					  + (_[2]?"_0."+_[2]+"||{}":"")
+						+ _[3].replace(/ (limit|offset):\s*(\d+)/ig, ";_3.$1=$2")
 						+ ";if(_2)for"
-					_ = "_1 in _2)if(_2.hasOwnProperty(_1)){if(_0.offset&&_0.offset--)continue;_0.i++;if(_0.limit&&_0.i-_0.offset>_0.limit)break;_0.key=_1;var "+_[1]+"=_2[_1];"
+					_ = "_1 in _2)if(_2.hasOwnProperty(_1)&&!(_3.offset&&_3.offset--)){_3.i++;if(_3.limit&&_3.i-_3.offset>_3.limit)break;_3.key=_1;var "+_[1]+"=_2[_1];"
 				} else _ = b+"){"
 				_ = "');"+a+"(var "+_
 			} else if (a) {
-				_ = "')"+(a == "if" ? ";" : "}else ")+"if("+c+"("+b.replace(/^[\w]+\s*$/, "o.$&")+")){"
+				var_names[b.match(/^\w+/)]=1
+				_ = "')"+(a == "if" ? ";" : "}else ")+"if("+c+"("+b+")){"
 			} else {
 				_ = b == "else " ? "')}else{" : "')};"
 			}
 			return _ + "_.push('"
 		})
+		delete var_names["null"]
 
-		return new Function("o", "var _=[];with(o||{}){_.push('" + s + "')}return _.join('')")
+		return new Function("_0", "var "+Object.keys(var_names).join(",")+";with(_0||{}){_.push('" + source + "')}return _.join('')")
 	}
 
 	root.liquid = liquid

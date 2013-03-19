@@ -24,6 +24,9 @@ update-readme:
 	        "$(SIZE_GZ) bytes"
 	@sed -i '/ bytes or .* gzipped/s/.*/($(SIZE) bytes or $(SIZE_GZ) bytes gzipped)/' README.md 
 
+update-tests:
+	@printf "$$(cat test/html.tpl)" "$$(for file in test/*.liquid; do printf '\n\n\n<script type="text/liquid">\n%s\n</script>' "$$(cat $$file)"; done)" > test/test.html
+
 error:
 	@curl -s \
 		    --data-urlencode 'output_info=errors' \

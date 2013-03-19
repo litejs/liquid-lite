@@ -1,6 +1,6 @@
 {
   "name": "liquid-lite",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "MIT",
   "description": "Liquid template engine for browser and node.js",
   "main": "liquid-lite.js",

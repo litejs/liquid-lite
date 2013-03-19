@@ -10,3 +10,15 @@
 <li> User has a {{ attr }}
 {% endfor %}
 
+{% for attr in deeper.object %}
+<li> User has a {{ attr }}
+{% endfor %}
+
+{% for attr in deeper.not_found %}
+<li> User has a {{ attr }}
+{% endfor %}
+
+{% for item in ["a", "b", "c"] %}
+<li> {{ item }}
+{% endfor %}
+
