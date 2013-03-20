@@ -1,2 +1,0 @@
-FILE=liquid-lite.js
-
