@@ -1,4 +1,4 @@
-<script src="../liquid-lite.min.js"></script>
+<script src="../liquid-lite.js"></script>
 
 %s
 

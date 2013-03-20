@@ -2,7 +2,7 @@
 
 
 /*
-* @version  0.1.3
+* @version  0.2.0
 * @author   Lauri Rooden - https://github.com/litejs/liquid-lite
 * @license  MIT License  - http://lauri.rooden.ee/mit-license.txt
 */
@@ -13,10 +13,14 @@
 
 	function liquid(source) {
 		var var_names = {"_=[]":1}
+		function add_name(s) {
+			s = s.match(/^[a-z]\w+/)
+			;/^(null|new|typeof|instanceof|void)$/.test(s) || (var_names[s]=1)
+		}
 		source = source
 		.replace(/\r?\n/g, "\\n")
 		.replace(/{{\s*((?:[^}]|}(?!}))+)}}/g, function(_, a) {
-			var_names[a.match(/^\w+/)]=1
+			add_name(a)
 			return "',(" + a.replace(/([^|])\|\s*([^|\s:]+)(?:\s*\:([^|]+))?/g, "$1).$2($3") + "),'"
 		})
 		.replace(/{%\s*(for|if|elsif)?\s*(\!?)\s*((?:[^%]|%(?!}))+)%}\\n?/g, function(_, a, c, b) {
@@ -30,14 +34,13 @@
 				} else _ = b+"){"
 				_ = "');"+a+"(var "+_
 			} else if (a) {
-				var_names[b.match(/^\w+/)]=1
+				add_name(b)
 				_ = "')"+(a == "if" ? ";" : "}else ")+"if("+c+"("+b+")){"
 			} else {
 				_ = b == "else " ? "')}else{" : "')};"
 			}
 			return _ + "_.push('"
 		})
-		delete var_names["null"]
 
 		return new Function("_0", "var "+Object.keys(var_names).join(",")+";with(_0||{}){_.push('" + source + "')}return _.join('')")
 	}
@@ -75,15 +78,15 @@
 		times - multiplication e.gw {{ 5 | times:4 }} #=> 20
 		divided_by - division e.g. {{ 10 | divided_by:2 }} #=> 5
 		split - split a string on a matching pattern e.g. {{ "a~b" | split:~ }} #=> ['a','b']	
-	*/
 	S.upcase = S.toUpperCase
 	S.downcase = S.toLowerCase
 	S.size = function(){
 		return this.length
 	}
 
+	*/
 
-}(this, String.prototype)
+}(this)
 
 
 

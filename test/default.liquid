@@ -1,7 +1,7 @@
 <ul class="products">
   {% for product in products limit: 5 %}
     <li>
-      <h2>{{ product.title | upcase }}</h2>
+      <h2>{{ product.title | toUpperCase }}</h2>
       Only {{ product.price }}
       <p>{{ product.description }}</p>
     </li>
