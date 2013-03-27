@@ -1,6 +1,7 @@
 
 
 FILE=$(shell sed '/"main":/!d;s///;s/[ ,"]//g' package.json)
+NAME=$(shell sed '/"name":/!d;s///;s/[ ,"]//g' package.json)
 
 .PHONY: test
 
@@ -25,6 +26,9 @@ update-readme:
 
 update-tests:
 	@printf "$$(cat test/html.tpl)" "$$(for file in test/*.liquid; do printf '\n\n\n<script type="text/liquid">\n%s\n</script>' "$$(cat $$file)"; done)" > test/test.html
+
+css-docs:
+	@styledocco -n "$(NAME)" css
 
 error:
 	@curl -s \

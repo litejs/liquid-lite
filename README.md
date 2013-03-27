@@ -5,13 +5,14 @@
 [4]: https://raw.github.com/litejs/liquid-lite/master/liquid-lite.js
 [5]: https://github.com/darthapo/liquid.js
 [date-format-lite]: http://www.litejs.com/date-format-lite/
+[liquid-filters-lite]: http://www.litejs.com/liquid-filters-lite/
 
 Liquid template engine
 ======================
 
 This is a not complete port of [Liquid][1] template engine.
 Download [compressed][3] 
-(993 bytes or 626 bytes gzipped)
+(997 bytes or 627 bytes gzipped)
 or [uncompressed][4] source.
 A complete port is available [by darthapo][5].
 
@@ -23,7 +24,7 @@ A complete port is available [by darthapo][5].
 ## How to use in browser
 
 ```html
-<script src=liquid-lite.min.js></script>
+<script src=liquid-lite.js></script>
 
 <script id=products type="text/liquid">
 <ul class="products">
@@ -81,6 +82,9 @@ var output = template(data)
     {% if user %}
       Hello {{ user.name }}
     {% endif %}
+    {% if user.name == "bob" %}
+      Hello Bob
+    {% endif %}
     ```
 
 - **for**
@@ -102,10 +106,11 @@ var output = template(data)
 
 Standard Filters are not implemented by default 
 but you have access to prototypes.
-Make as many as you need.
+Make as many as you need
+or use [liquid-filters-lite][].
 
 - **date** - reformat a date syntax reference  
-    Works well with [date-format-lite][]
+    Implemented in [date-format-lite][]
     ```javascript
     var item = { "timestamp": 1363770186, "datetime": "2013-03-20T09:03:06Z" }
     {{ timestamp | date:"isoUtcDateTime" }}
@@ -124,135 +129,7 @@ Make as many as you need.
     String.prototype.downcase = String.prototype.toLowerCase
     ```
 
-- **upcase** - convert an input string to uppercase
-    ```javascript
-    String.prototype.upcase = String.prototype.toUpperCase
-    ```
-
-- **first** - get the first element of the passed in array
-    ```javascript
-    Array.prototype.first = function() {
-      return this[0]
-    }
-    ```
-
-- **last** - get the last element of the passed in array
-    ```javascript
-    Array.prototype.last = function() {
-      return this[this.length - 1]
-    }
-    ```
-
-- **join** - join elements of the array with certain character between them.
-    _Native in javascript_
-
-- **sort** - sort elements of the array
-    ```javascript
-		//TODO
-    ```
-
-- **map** - map/collect an array on a given property
-    ```javascript
-		//TODO
-    ```
-
-- **size** - return the size of an array or string
-    ```javascript
-    String.prototype.size = Array.prototype.size = function() {
-      return this.length
-    }
-    ```
-
-- **escape** - escape a string
-    ```javascript
-		//TODO
-    ```
-
-- **escape_once** - returns an escaped version of html without affecting existing escaped entities
-    ```javascript
-		//TODO
-    ```
-
-- **strip_html** - strip html from string
-    ```javascript
-		//TODO
-    ```
-
-- **strip_newlines** - strip all newlines (\n) from string
-    ```javascript
-		//TODO
-    ```
-
-- **newline_to_br** - replace each newline (\n) with html break
-    ```javascript
-		//TODO
-    ```
-
-- **replace** - replace each occurrence e.g. {{ 'foofoo' | replace:'foo','bar' }} #=> 'barbar'.
-    _Native in javascript_
-
-- **replace_first** - replace the first occurrence e.g. {{ 'barbar' | replace_first:'bar','foo' }} #=> 'foobar'
-    ```javascript
-		//TODO
-    ```
-
-- **remove** - remove each occurrence e.g. {{ 'foobarfoobar' | remove:'foo' }} #=> 'barbar'
-    ```javascript
-		//TODO
-    ```
-
-- **remove_first** - remove the first occurrence e.g. {{ 'barbar' | remove_first:'bar' }} #=> 'bar'
-    ```javascript
-		//TODO
-    ```
-
-- **truncate** - truncate a string down to x characters
-    ```javascript
-		//TODO
-    ```
-
-- **truncatewords** - truncate a string down to x words
-    ```javascript
-		//TODO
-    ```
-
-- **prepend** - prepend a string e.g. {{ 'bar' | prepend:'foo' }} #=> 'foobar'
-    ```javascript
-		//TODO
-    ```
-
-- **append** - append a string e.g. {{ 'foo' | append:'bar' }} #=> 'foobar'
-    ```javascript
-		//TODO
-    ```
-
-- **minus** - subtraction e.g. {{ 4 | minus:2 }} #=> 2
-    ```javascript
-		//TODO
-    ```
-
-- **plus** - addition e.g. {{ '1' | plus:'1' }} #=> '11', {{ 1 | plus:1 }} #=> 2
-    ```javascript
-		//TODO
-    ```
-
-- **times** - multiplication e.g {{ 5 | times:4 }} #=> 20
-    ```javascript
-		//TODO
-    ```
-
-- **divided_by** - division e.g. {{ 10 | divided_by:2 }} #=> 5
-    ```javascript
-		//TODO
-    ```
-
-- **split** - split a string on a matching pattern e.g. {{ "a~b" | split:~ }} #=> ['a','b'].
-    _Native in javascript_
-
-- **modulo** - remainder, e.g. {{ 3 | modulo:2 }} #=> 1
-    ```javascript
-		//TODO
-    ```
+See [liquid-filters-lite][] for more examples
 
 
 ### Licence
