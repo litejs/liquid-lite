@@ -16,6 +16,8 @@ Download [compressed][3]
 or [uncompressed][4] source.
 A complete port is available [by darthapo][5].
 
+[![Build Status](https://travis-ci.org/litejs/liquid-lite.png?branch=master)](https://travis-ci.org/litejs/liquid-lite)
+
 ## When to use liquid-lite
 
 - When you trust your templates
