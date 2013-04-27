@@ -1,6 +1,6 @@
 {
   "name": "liquid-lite",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "MIT",
   "description": "Liquid template engine for browser and node.js",
   "main": "liquid-lite.js",
@@ -11,9 +11,6 @@
   },
   "bugs": {
     "url": "https://github.com/litejs/liquid-lite/issues"
-  },
-  "directories": {
-    "test": "test"
   },
   "scripts": {
     "test": "node test/run.js"
