@@ -12,7 +12,7 @@ Liquid template engine
 
 This is a not complete port of [Liquid][1] template engine.
 Download [compressed][3] 
-(1003 bytes, 631 bytes gzipped)
+(963 bytes, 609 bytes gzipped)
 or [uncompressed][4] source.
 A complete port is available [by darthapo][5].
 
@@ -77,7 +77,7 @@ var data = { products:
 var output = template(data)
 ```
 
-## Currently supported tags
+## Tags
 
 - **if** / **elsif** / **else**  
     ```javascript
@@ -133,6 +133,10 @@ or use [liquid-filters-lite][].
 
 See [liquid-filters-lite][] for more examples
 
+## Notes
+
+-   You can access to properties named by reserved words thru _0 object,
+    `{% for val in _0["enum"] %}`.
 
 ### Licence
 

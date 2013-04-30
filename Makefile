@@ -25,6 +25,9 @@ update-readme:
 	        "$(SIZE_GZ) bytes"
 	@sed -i '/ bytes, .* gzipped/s/.*/($(SIZE) bytes, $(SIZE_GZ) bytes gzipped)/' README.md
 
+update-readme-from-source:
+	@sed -e '/\/\*/,/\*\//!d' -e 's,[ /]*\*[ /]\?,,' -e 's/^@/    @/' $(FILE) > README.md
+
 update-version:
 	@sed -i '/@version/s/[^ ]*$$/$(VERSION)/' $(FILE)
 
