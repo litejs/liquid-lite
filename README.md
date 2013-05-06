@@ -12,7 +12,7 @@ Liquid template engine
 
 This is a not complete port of [Liquid][1] template engine.
 Download [compressed][3] 
-(963 bytes, 609 bytes gzipped)
+(929 bytes, 589 bytes gzipped)
 or [uncompressed][4] source.
 A complete port is available [by darthapo][5].
 
@@ -79,30 +79,37 @@ var output = template(data)
 
 ## Tags
 
-- **if** / **elsif** / **else**  
-    ```javascript
-    {% if user %}
-      Hello {{ user.name }}
-    {% endif %}
-    {% if user.name == "bob" %}
-      Hello Bob
-    {% endif %}
-    ```
+### if / elsif / else
 
-- **for**
-    ```javascript
-    {% for product in products %}
-      {{ product.title }}
-    {% endfor %}
+```javascript
+{% if user %}
+  Hello {{ user.name }}
+{% endif %}
+{% if user.name == "bob" %}
+  Hello Bob
+{% endif %}
+```
 
-    {% for i = 3; i > 0; i-- %}
-      {{ i }}
-    {% endfor %}
+### for
 
-    {% for item in ["a", "b", "c"] %}
-      {{ item }}
-    {% endfor %}
-    ```
+```javascript
+{% for product in products %}
+  {{ product.title }}
+{% endfor %}
+
+{% for i = 3; i > 0; i-- %}
+  {{ i }}
+{% endfor %}
+
+{% for item in ["a", "b", "c"] %}
+  {{ item }}
+{% endfor %}
+```
+
+The following helper variables are available:
+
+-   loop.key - named key when iterated over Object
+-   loop.i - index
 
 ## Liquid Filters
 

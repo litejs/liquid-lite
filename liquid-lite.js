@@ -2,7 +2,7 @@
 
 
 /*
-* @version  0.2.3
+* @version  0.2.4
 * @author   Lauri Rooden - https://github.com/litejs/liquid-lite
 * @license  MIT License  - http://lauri.rooden.ee/mit-license.txt
 */
@@ -22,11 +22,11 @@ this.liquid =	function(source) {
 	}
 	source = source
 	.replace(/\r?\n/g, "\\n")
-	.replace(/{{\s*((?:[^}]|}(?!}))+)}}/g, function(_, a) {
+	.replace(/{{(.+?)}}/g, function(_, a) {
 		add_name(a)
-		return "',(" + a.replace(/([^|])\|\s*([^|\s:]+)(?:\s*\:([^|]+))?/g, "$1).$2($3") + "),'"
+		return "',(" + a.replace(/([^|])\|\s*(\w+)(?:\s*\:([^|]+))?/g, "$1).$2($3") + "),'"
 	})
-	.replace(/{%\s*(for|if|elsif)?\s*(\!?)\s*((?:[^%]|%(?!}))+)%}(?:\\n)?/g, function(_, tag, negation, rest) {
+	.replace(/{%\s*(for|if|elsif)?\s*(\!?)\s*(.+?)%}(?:\\n)?/g, function(_, tag, negation, rest) {
 		if (tag == "for") {
 			if (_ = rest.match(/^(\w+) in (\w*)(.*)/)) {
 				tag = "var loop={i:0,offset:0},_3=loop,_2="
