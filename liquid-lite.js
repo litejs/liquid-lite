@@ -2,7 +2,7 @@
 
 
 /*
-* @version  0.2.4
+* @version  0.2.5
 * @author   Lauri Rooden - https://github.com/litejs/liquid-lite
 * @license  MIT License  - http://lauri.rooden.ee/mit-license.txt
 */
@@ -17,8 +17,7 @@
 this.liquid =	function(source) {
 	var var_names = {"_=[]":1}
 	function add_name(s, obj) {
-		s = s.match(/^[a-z]\w*/)
-		if (s && !/^(new|typeof)$/.test(s)) var_names[ obj ? s+'={}' : s+'=""' ] = 1
+		if (s = s.match(/^\s*(?:new\b|typeof\b|[^a-z].*)?(\w*)/)[1]) var_names[ s + (obj||'=""') ] = 1
 	}
 	source = source
 	.replace(/\r?\n/g, "\\n")
@@ -29,12 +28,12 @@ this.liquid =	function(source) {
 	.replace(/{%\s*(for|if|elsif)?\s*(\!?)\s*(.+?)%}(?:\\n)?/g, function(_, tag, negation, rest) {
 		if (tag == "for") {
 			if (_ = rest.match(/^(\w+) in (\w*)(.*)/)) {
+			  add_name(_[2], '={}')
 				tag = "var loop={i:0,offset:0},_3=loop,_2="
 					+ _[2]
 					+ _[3].replace(/ (limit|offset):\s*(\d+)/ig, ";_3.$1=$2")
 					+ ";if(_2)for"
 				_ = "_1 in _2)if(_2.hasOwnProperty(_1)&&!(_3.offset&&_3.offset--)){_3.i++;if(_3.limit&&_3.i-_3.offset>_3.limit)break;_3.key=_1;var "+_[1]+"=_2[_1];"
-			  add_name(_[2], 1)
 			} else _ = rest+"){"
 			_ = "');"+tag+"(var "+_
 		/*

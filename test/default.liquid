@@ -7,6 +7,8 @@
     </li>
   {% endfor %}
 
+	{{ not_found | toUpperCase }}
+
   {% for product in products offset: 5 %}
     <li>{{ product.title }} {{ product.price }}</li>
   {% endfor %}

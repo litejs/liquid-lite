@@ -12,7 +12,7 @@ Liquid template engine
 
 This is a not complete port of [Liquid][1] template engine.
 Download [compressed][3] 
-(929 bytes, 589 bytes gzipped)
+(930 bytes, 584 bytes gzipped)
 or [uncompressed][4] source.
 A complete port is available [by darthapo][5].
 
