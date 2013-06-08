@@ -142,8 +142,10 @@ See [liquid-filters-lite][] for more examples
 
 ## Notes
 
--   You can access to properties named by reserved words thru _0 object,
-    `{% for val in _0["enum"] %}`.
+-   You can access to properties named by reserved words thru _0 object.
+    ```javascript
+    {% for val in _0["enum"] %}
+    ```
 
 ### Licence
 
